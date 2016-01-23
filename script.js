@@ -19,13 +19,15 @@ function recursion(length){
  	drawing.rotate(-Math.PI/4);
  	//teken linkerkant (bestond al)
  	drawing.fillRect(0,0,length*shrink,length*shrink);
- 	//teken rechterkant (nieuw ans)
- 	drawing.fillRect(length,0,length*shrink,length*shrink);
  	drawing.save();
 
  	// Ga door links
   	if(length > stop){
+		//nieuw
+		recursionRight(shrink*length);
+
 		recursion(shrink * length);
+
 	};
 /*
 	// Teken de rechtse
@@ -41,6 +43,12 @@ function recursion(length){
 		recursion(shrink * length);
 	};  
 	*/	
+};
+
+function recursionRight(length){
+	//teken rechterkant (nieuw ans)
+	//drawing.rotate(Math.PI/4);
+ 	drawing.fillRect(length,0,length*shrink,length*shrink);
 };
 
 // Teken de eerste
