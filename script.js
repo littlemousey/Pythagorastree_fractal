@@ -8,37 +8,31 @@ var r = 0, g = 0, b = 0;
 var length = 100;
 var stop = 5;
 drawing.fillStyle = rgb(r, g, b);
-var count = 0;
+var depth = 0;
 
-//origin van canvas op 300,300 zetten
+// Origin van canvas
 drawing.translate(500,500);
 drawing.rotate(-Math.PI/4);
 
 
-function recursion(length){
-	drawing.fillStyle = rgb (count * 40, g, b);
-	// Teken de linkse
-	//drawing.restore();
+function recursion(length, depth){
+	drawing.fillStyle = rgb (depth * 40, g, b);
+	console.log(depth);
+	// Teken de linker
  	drawing.save();
  	drawing.translate(length,0);
  	drawing.rotate(-Math.PI/4);
- 	//teken linkerkant (bestond al)
  	drawing.fillRect(0,0,length*shrink,length*shrink);
 
  	// Ga door links
   	if(length > stop){
-		//nieuw
-		//recursionRight(shrink*length);
-
-		count ++;
-		recursion(shrink * length);
-		count --;
+		recursion(shrink * length, depth + 1);
 
 	};
 
 	drawing.restore();
 
-	// Teken de rechtse
+	// Teken de rechter
 	drawing.translate(length,length);
 	drawing.rotate(Math.PI/4);
 	drawing.translate(0,-length*shrink);
@@ -46,27 +40,18 @@ function recursion(length){
 
  	// Ga door rechts
   	if(length > stop){
-		count ++;
-		recursion(shrink * length);
-		count --;
+		recursion(shrink * length, depth + 1);
 	};
 };
 
-function recursionRight(length){
-	//teken rechterkant (nieuw ans)
-	//drawing.rotate(Math.PI/4);
- 	drawing.fillRect(length,0,length*shrink,length*shrink);
-};
-
 // Teken de eerste
-
 drawing.translate(length,0);
 drawing.rotate(-Math.PI/4);
 drawing.fillRect(0,0,length*shrink,length*shrink);
 
 
 // Teken de rest
-recursion(length * shrink);
+recursion(length * shrink, depth);
 
 function rgb(r, g, b) {
 	return 'rgb(' + r + ',' + g + ',' + b + ')';
