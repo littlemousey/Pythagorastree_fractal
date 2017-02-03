@@ -11,13 +11,16 @@ drawing.fillStyle = rgb(r, g, b);
 var depth = 0;
 
 // Origin van canvas
-drawing.translate(500,500);
-drawing.rotate(-Math.PI/4);
+drawing.translate(600,600);
+drawing.rotate(-Math.PI/2);
+
+// Teken de eerste
+drawing.translate(length,0);
+drawing.fillRect(0,0,length*shrink,length*shrink);
 
 
 function recursion(length, depth){
 	drawing.fillStyle = rgb (depth * 40, g, b);
-	console.log(depth);
 	// Teken de linker
  	drawing.save();
  	drawing.translate(length,0);
@@ -43,12 +46,6 @@ function recursion(length, depth){
 		recursion(shrink * length, depth + 1);
 	};
 };
-
-// Teken de eerste
-drawing.translate(length,0);
-drawing.rotate(-Math.PI/4);
-drawing.fillRect(0,0,length*shrink,length*shrink);
-
 
 // Teken de rest
 recursion(length * shrink, depth);
